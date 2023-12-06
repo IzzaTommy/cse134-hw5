@@ -1,0 +1,26 @@
+:root {
+    --widget-background-color: lightgray;
+    --widget-def-width: 400px;
+    --widget-def-padding: 1.5rem;
+    --rating-def-color: gray;
+    --rating-hover-color: orange;
+}
+
+rating-widget:defined, weather-widget:defined {
+
+        display: block;
+        width: var(--widget-def-width);
+        height: 130px;
+        padding: var(--widget-def-padding);
+        text-align: center;
+        background-color: var(--widget-background-color, #CCCCCC);
+        margin-bottom: 2rem;
+}
+
+rating-widget:defined {
+    height: 130px;
+}
+
+weather-widget:defined {
+    height: 90px;
+}
