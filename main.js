@@ -258,7 +258,7 @@ class WeatherWidget extends HTMLElement
                         // indicate that an error occurred
                         if (xhr2.status !== 200)
                         {
-                            pEl.innerHTML = 'Error Occured!';
+                            pEl.innerHTML = 'Error Occurred!';
                         }
                     }
                 };
@@ -271,7 +271,7 @@ class WeatherWidget extends HTMLElement
                 // indicate that an error occurred
                 if (xhr.status !== 200)
                 {
-                    pEl.innerHTML = 'Error Occured!';
+                    pEl.innerHTML = 'Error Occurred!';
                 }
             }
         };
