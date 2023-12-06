@@ -12,14 +12,27 @@ class RatingWidget extends HTMLElement
         this.shadowRoot.innerHTML =
         `<style>
             :host {
-                display: inline-block;
+                display: block;
+                width: 400px;
+                height: 130px;
+                padding: 1.5rem;
+                text-align: center;
                 background-color: lightgray;
+            }
+
+            div {
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: center;
+            }
+
+            h2 {
+                margin: 0;
             }
 
             label {
                 font-size: 2rem;
                 color: gray;
-                line-height: 0;
             }
 
             label:hover, label:has(~ label:hover) {
@@ -33,25 +46,29 @@ class RatingWidget extends HTMLElement
             input {
                 display: none;
             }
+
         </style>
 
         <h2>Ratings Widget</h2>
 
         <p>Rating Message</p>
 
-        <label for='1'>&starf;</label>
-        <input id='1' type='button'></input>
-        <label for='2'>&starf;</label>
-        <input id='2' type='button'></input>
-        <label for='3'>&starf;</label>
-        <input id='3' type='button'></input>
-        <label for='4'>&starf;</label>
-        <input id='4' type='button'></input>
-        <label for='5'>&starf;</label>
-        <input id='5' type='button' value='&starf;'></input>`
+        <div>
+            <label for='1'>&starf;</label>
+            <input id='1' type='button'></input>
+            <label for='2'>&starf;</label>
+            <input id='2' type='button'></input>
+            <label for='3'>&starf;</label>
+            <input id='3' type='button'></input>
+            <label for='4'>&starf;</label>
+            <input id='4' type='button'></input>
+            <label for='5'>&starf;</label>
+            <input id='5' type='button'></input>
+        </div>`
 
-        const inputElList = this.shadowRoot.querySelectorAll('input');
-        const pEl = this.shadowRoot.querySelector('p');
+        const shadow = this.shadowRoot;
+        const inputElList = shadow.querySelectorAll('input');
+        const pEl = shadow.querySelector('p');
 
         for (let i = 0; i < inputElList.length; i++)
         {
@@ -70,11 +87,10 @@ class RatingWidget extends HTMLElement
     
             xhr.onreadystatechange = () =>
             {
+                pEl.style.opacity = 1;
                 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200)
                 {
                     console.log(xhr.responseText);
-                    
-                    pEl.style.opacity = 1;
 
                     if (rating > 3)
                     {
@@ -84,18 +100,20 @@ class RatingWidget extends HTMLElement
                     {
                         pEl.innerHTML = `Thanks for your feedback of ` + rating + ` stars. We'll try to do better!`;
                     }
+                    shadow.removeChild(shadow.lastChild);
                 }
                 else
                 {
                     if (xhr.status !== 200)
                     {
-                        pEl.innerHTML = 'Unsuccessful transfer!';
+                        pEl.innerHTML = 'Error Occured!';
                     }
                 }
             };
     
             xhr.send("question=How+satisfied+are+you%3F&sentBy=JS&rating=" + rating);
         }
+        
     }
 
     disconnectedCallback() {
