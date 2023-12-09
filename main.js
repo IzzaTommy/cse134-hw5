@@ -277,7 +277,7 @@ class WeatherWidget extends HTMLElement
         };
 
         // send the request
-        xhr.send();   
+        xhr.send(null);   
     }
 
     // echo message on widget deletion
